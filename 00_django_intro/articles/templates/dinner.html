@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p>저녁은 {{foods|join:', '}} 중에 {{pick}} (으)로 간다!</p>
+<br>
+<p>메뉴판</p>
+<ul>
+    {#주석이지롱#}
+    {% comment "" %}
+    여러
+    줄
+    주석
+    이지롱
+    {% endcomment %}
+    {% for food in foods %}
+        <li>{{food}}</li>
+    {% endfor %}
+</ul>
+<a href={% url 'index' %} style="text-decorate:none;">뒤로!</a>
+
+{% endblock content %}

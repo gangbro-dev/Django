@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="/peek/" method="GET">
+    <label for="message">님 누구임? 이름좀</label>
+    <br>
+    <input type="text" name="NAME" id="NAME">
+    <input type="submit" value="이게 내이름임">
+</form>
+<br>
+<br>
+<p>ㅎㅇ {{NAME}}</p>
+<p>난 {{name}}</p>
+{% endblock content %}
