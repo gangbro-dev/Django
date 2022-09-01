@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Edit</h1>
+    <form action="{% url 'articles:update' article.pk %}" method='POST'>
+        {% csrf_token %}
+        <div style='display: flex; justify-content: start'>
+          <label for='title' style='position: relative;'>Title: </label>
+          <input type="text" name="title" id="title" style='position: absoulte; left: 50%'><br>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div style='display: flex; justify-content: center; align-items: center;'>
+          <label for="content">Content: </label>
+          <input type="text" name="content" id="content" style='width: 300px; height: 200px; justify-self: center;'><br>
+        </div>
+        <input type="submit" value="수정">
+    </form>
+    <hr>
+    <a href="{% url 'articles:index' %}">뒤로</a>
+{% endblock content %}

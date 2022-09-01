@@ -7,7 +7,8 @@
   {% for article in articles %}
     <p>글 번호 : {{ article.pk }}</p>
     <p>제목 : {{ article.title }}</p>
-    <p>내용 : {{ article.content }}</p>
+    <br>
+    <a href="{% url 'articles:detail' article.pk %}">details</a>
     <hr>
   {% endfor %}
 {% endblock content %}
