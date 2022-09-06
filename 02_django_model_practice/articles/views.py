@@ -1,34 +1,64 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_safe, require_http_methods, require_POST
 from .models import Article
+from .forms import ArticleForm
 
 # Create your views here.
+@require_safe
 def index(request):
     articles = Article.objects.all()
     context = {
-        'articles': articles
+        'articles': articles,
     }
     return render(request, 'articles/index.html', context)
 
 
-def new(request):
-    return render(request, 'articles/new.html')
-
-
+@require_http_methods(['GET', 'POST'])
 def create(request):
-    # 사용자의 데이터를 받아서 DB에 저장
-    title = request.GET.get('title')
-    content = request.GET.get('content')
-    # DB에 저장
-    # 1번 방법
-    # article = Article()
-    # article.title = title
-    # article.content = content
-    # article.save()
+    if request.method == 'POST':
+        # create
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article = form.save()
+            return redirect('articles:detail', article)
+    else:
+        # new
+        form = ArticleForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'articles/create.html', context)
 
-    # 2번 방법 **추천**
-    article = Article(title=title, content=content)
-    article.save()
 
-    # 3번 방법
-    # Article.objects.create(title=title, content=content)
-    return render(request, 'articles/create.html')
+@require_safe
+def detail(request, pk):
+    article = Article.objects.get(pk=pk)
+    context = {
+        'article': article,
+    }
+    return render(request, 'articles/detail.html', context)
+
+
+@require_POST
+def update(request, pk):
+    article = Article.objects.get(pk=pk)
+    if request.method == 'POST':
+        # update
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('articles:detail', article.pk)
+    else:
+        #edit
+        form = ArticleForm(instance=article)
+    context = {
+        'article': article,
+        'form': form,
+    }
+    return render(request, 'articles/edit.html', context)
+
+@require_POST
+def delete(request, pk):
+    article = Article.objects.get(pk=pk)
+    article.delete()
+    return redirect('articles:index')
