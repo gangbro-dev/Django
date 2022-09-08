@@ -2,12 +2,16 @@
 
 {% block content %}
   <h1>Articles</h1>
-  <a href="{% url 'articles:new' %}">NEW</a>
+  <a href="{% url 'articles:create' %}">NEW</a>
   <hr>
   {% for article in articles %}
     <p>글 번호 : {{ article.pk }}</p>
     <p>제목 : {{ article.title }}</p>
+<<<<<<< HEAD
     <br>
+=======
+    <p>내용 : {{ article.content }}</p>
+>>>>>>> 4e59eac205cc821d21b2a8a957f741db3d61c8e8
     <a href="{% url 'articles:detail' article.pk %}">details</a>
     <hr>
   {% endfor %}

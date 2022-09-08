@@ -2,4 +2,5 @@
 {% block content %}
     <p>안녕하세요 저는 {{info.name|lower}} 입니다.</p>
     <p>제 이름은 {{foods.0}} 입니다.</p>
+    <a href={% url 'articles:index' %} style="text-decorate:none;">뒤로!</a>
 {% endblock content %}

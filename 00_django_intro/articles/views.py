@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'articles/index.html')
 
 
 def greeting(request):
@@ -14,7 +14,7 @@ def greeting(request):
     }
     context = {'foods': foods,
                'info': info}
-    return render(request, 'greeting.html', context)
+    return render(request, 'articles/greeting.html', context)
 
 
 def dinner(request):
@@ -24,4 +24,4 @@ def dinner(request):
         'pick': pick,
         'foods': foods,
     }
-    return render(request, 'dinner.html', context)
+    return render(request, 'articles/dinner.html', context)
