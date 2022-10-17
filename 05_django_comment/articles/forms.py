@@ -1,5 +1,9 @@
 from django import forms
+<<<<<<< HEAD
 from .models import Article
+=======
+from .models import Article, Comment
+>>>>>>> 453aefd82c356c5398bc0fedd06718d41e3455c2
 
 
 class ArticleForm(forms.ModelForm):
@@ -33,3 +37,14 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = '__all__'
         # exclude = ('title',)
+<<<<<<< HEAD
+=======
+
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        exclude = ('article',)
+        fields = '__all__'
+>>>>>>> 453aefd82c356c5398bc0fedd06718d41e3455c2
